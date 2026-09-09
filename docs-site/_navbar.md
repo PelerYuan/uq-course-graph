@@ -1,0 +1,2 @@
+- [GitHub repository](https://github.com/PelerYuan/uq-course-graph)
+- [Contributing](https://github.com/PelerYuan/uq-course-graph/blob/master/CONTRIBUTING.md)

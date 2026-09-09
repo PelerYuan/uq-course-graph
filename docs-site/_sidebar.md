@@ -1,0 +1,35 @@
+- **Start here**
+  - [Welcome](README.md)
+  - [Complete workflow](pages/getting-started.md)
+  - [Concepts and data model](pages/concepts.md)
+- **Install and configure**
+  - [Installation](pages/installation.md)
+  - [Configuration](pages/configuration.md)
+- **Run the pipeline**
+  - [Pipeline overview](pages/pipeline/overview.md)
+  - [1. Scrape UQ data](pages/pipeline/scrape.md)
+  - [2. Parse prerequisites](pages/pipeline/parse.md)
+  - [3. Review ambiguous rules](pages/pipeline/review.md)
+  - [4. Build the graph](pages/pipeline/graph.md)
+  - [5. Create visualizations](pages/pipeline/visualize.md)
+- **Explore the graph**
+  - [Selector overview](pages/selectors/overview.md)
+  - [Exact course selection](pages/selectors/exact.md)
+  - [Prerequisite chains](pages/selectors/ancestors.md)
+  - [Unlocked courses](pages/selectors/descendants.md)
+  - [Neighborhoods](pages/selectors/neighborhood.md)
+  - [Discipline filters](pages/selectors/prefixes.md)
+  - [Combining selectors](pages/selectors/composition.md)
+- **Understand results**
+  - [Network graphs](pages/results/network.md)
+  - [Statistics](pages/results/statistics.md)
+  - [Limitations](pages/results/limitations.md)
+- **Reference**
+  - [Scraping functions](pages/reference/scraping.md)
+  - [Parsing functions](pages/reference/parsing.md)
+  - [Graph functions](pages/reference/graph.md)
+  - [Selector functions](pages/reference/selectors.md)
+  - [Plotting functions](pages/reference/plotting.md)
+- **Support**
+  - [Troubleshooting](pages/troubleshooting.md)
+  - [Reproducibility](pages/reproducibility.md)
