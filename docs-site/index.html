@@ -10,6 +10,8 @@
   <style>
     :root { --theme-color: #1976d2; --base-font-size: 16px; --sidebar-width: 290px; }
     .markdown-section img { border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .cover-main img { display: block; width: min(92vw, 1500px); max-width: 92vw; max-height: 62vh; object-fit: contain; margin: 2.5rem auto 1.5rem; border-radius: 10px; box-shadow: 0 8px 30px rgba(0,0,0,.18); }
+    .cover-main blockquote { max-width: 1100px; margin-left: auto; margin-right: auto; }
     .markdown-section pre > code { font-size: 0.9em; }
     .app-nav { margin-right: 24px; }
   </style>
@@ -23,7 +25,7 @@
       loadSidebar: true,
       loadNavbar: true,
       coverpage: '_coverpage.md',
-      homepage: 'README.md',
+      homepage: 'pages/getting-started.md',
       subMaxLevel: 3,
       auto2top: true,
       search: { paths: 'auto', placeholder: 'Search the documentation', noData: 'No results' },
