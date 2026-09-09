@@ -4,16 +4,10 @@ library(tibble)
 library(jsonlite)
 
 # ============================================================
-# 可解析性检查
 # ============================================================
 
-#' 检查前置条件文本是否为纯课程代码布尔表达式
 #'
-#' 把课程代码、and/or、括号、逗号这些合法 token 全部去掉,
-#' 如果还剩下实质性文字,说明混入了自由文本(如"32 units"、
-#' "Year 12"这类描述性要求),判定为不可解析
 #'
-#' @param text 原始前置条件文本
 #' @return TRUE/FALSE
 is_clean_prereq <- function(text) {
   remainder <- text
@@ -26,39 +20,25 @@ is_clean_prereq <- function(text) {
 
 
 # ============================================================
-# 分词与解析
 # ============================================================
 
-#' 把前置条件文本切分成 token 序列
 #'
-#' 逗号视为 or 的同义写法;and/or 统一转小写,课程代码保持原样
 #'
-#' @param text 已通过 is_clean_prereq 检查的文本
-#' @return 字符向量,如 c("ENGG1300","and","(","MATH1051","or","MATH1071",")")
 tokenize_prereq <- function(text) {
-  # 先合并 ", or" 这种写法,避免产生重复的 or token
   text <- str_replace_all(text, ",\\s*(?i)or\\b", " or")
-  # 剩余的裸逗号也当作 or 处理
   text <- str_replace_all(text, ",", " or ")
 
   tokens <- str_extract_all(text, "\\(|\\)|[A-Z]{4}\\d{4}|(?i)\\b(?:and|or)\\b")[[1]]
 
-  # 课程代码保持原样,and/or 统一转小写
   ifelse(str_detect(tokens, "^[A-Z]{4}\\d{4}$"), tokens, str_to_lower(tokens))
 }
 
 
-#' 递归下降解析器:把 token 序列解析成嵌套 AND/OR 树
 #'
-#' 文法(优先级从低到高):
 #'   expr := term ("or" term)*
 #'   term := factor ("and" factor)*
-#'   factor := "(" expr ")" | 课程代码
 #'
-#' 叶子节点是课程代码字符串;内部节点是 list(op="and"/"or", args=list(...))
 #'
-#' @param tokens tokenize_prereq() 的输出
-#' @return 嵌套 list 结构,或单个课程代码字符串(无逻辑运算时)
 parse_prereq_expr <- function(tokens) {
   pos <- 1
   n <- length(tokens)
@@ -76,7 +56,7 @@ parse_prereq_expr <- function(tokens) {
       return(node)
     }
     advance()
-    tok  # 叶子节点:课程代码
+    return(tok)
   }
 
   parse_term <- function() {
@@ -105,25 +85,20 @@ parse_prereq_expr <- function(tokens) {
 }
 
 
-#' 展平逻辑树,取出其中提到的所有课程代码(不含逻辑关系,仅用于建图)
 #'
-#' @param node parse_prereq_expr() 的输出
-#' @return 课程代码字符向量
 flatten_prereq_codes <- function(node) {
   if (is.character(node)) return(node)
-  unlist(lapply(node$args, flatten_prereq_codes))
+  if (is.list(node) && !is.null(node$args)) {
+    return(unlist(lapply(node$args, flatten_prereq_codes), use.names = FALSE))
+  }
+  character()
 }
 
 
 # ============================================================
-# 主流程
 # ============================================================
 
-#' 批量解析 courses_info 里的 prerequisite / recommended_prerequisite 字段
 #'
-#' @param courses_info 含 course_code、prerequisite、recommended_prerequisite 列的 data.frame
-#' @param output_dir 输出目录
-#' @return list(edges, logic, manual_review) 三个 data.frame
 parse_all_prerequisites <- function(courses_info, output_dir = ".") {
 
   edges <- list()
@@ -160,8 +135,6 @@ parse_all_prerequisites <- function(courses_info, output_dir = ".") {
       }
 
       codes <- unique(flatten_prereq_codes(tree))
-      # toJSON() 返回带 "json" S3 类的对象,多行 bind_rows 时类型会冲突,
-      # 转成普通字符串存储
       tree_json <- as.character(toJSON(tree, auto_unbox = TRUE))
 
       logic_rows[[length(logic_rows) + 1]] <- tibble(

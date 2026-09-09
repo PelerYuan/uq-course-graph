@@ -4,7 +4,6 @@ library(stringr)
 library(tidyr)
 
 
-# 统一配色,跟依赖图那边保持一致的视觉语言
 PALETTE_MAIN <- "#42a5f5"
 PALETTE_ACCENT <- "#d84315"
 THEME_BASE <- theme_minimal(base_size = 11) +
@@ -15,14 +14,8 @@ THEME_BASE <- theme_minimal(base_size = 11) +
   )
 
 
-#' 图A: 关键课程排行榜
 #'
-#' downstream_count = 顺着依赖链能解锁的下游课程总数,
-#' 这个数字比"直接前置了几门课"更能反映一门课的地基程度
 #'
-#' @param key_courses_file build_graph.R 生成的 key_courses.csv
-#' @param top_n 显示前几名
-#' @param output_file 输出路径
 plot_key_courses <- function(key_courses_file = "key_courses.csv",
                               top_n = 15,
                               output_file = "stat_key_courses.png") {
@@ -47,13 +40,9 @@ plot_key_courses <- function(key_courses_file = "key_courses.csv",
 }
 
 
-#' 图B: 各学科课程数量分布(按年级堆叠)
 #'
-#' 课程代码第5位数字就是年级(CSSE2310 -> 2年级),
-#' 堆叠柱状图能同时看出"哪个学科课多"和"这些课集中在哪个年级"
 #'
 #' @param courses_file courses_info.csv
-#' @param output_file 输出路径
 plot_prefix_by_level <- function(courses_file = "courses_info.csv",
                                   output_file = "stat_prefix_by_level.png") {
   df <- read.csv(courses_file, stringsAsFactors = FALSE) %>%
@@ -84,14 +73,10 @@ plot_prefix_by_level <- function(courses_file = "courses_info.csv",
 }
 
 
-#' 图C: 前置课程数量 vs 年级
 #'
-#' 检验一个直觉假设:年级越高的课,前置要求是不是越多?
-#' 用箱线图能同时看出中位数和离散程度,比单纯画平均值信息量大
 #'
 #' @param courses_file courses_info.csv
 #' @param edges_file prereq_edges.csv
-#' @param output_file 输出路径
 plot_prereq_count_by_level <- function(courses_file = "courses_info.csv",
                                         edges_file = "prereq_edges.csv",
                                         output_file = "stat_prereq_by_level.png") {
@@ -99,8 +84,6 @@ plot_prereq_count_by_level <- function(courses_file = "courses_info.csv",
   edges <- read.csv(edges_file, stringsAsFactors = FALSE) %>%
     filter(field == "prerequisite")
 
-  # 每门课被列出的前置课程数(注意 OR 关系会让这个数字偏大,
-  # 比如 "A or B" 算2门,但实际只需修其中1门——这是拍平边表的固有局限)
   prereq_count <- edges %>% count(course_code, name = "n_prereq")
 
   df <- courses %>%
@@ -127,19 +110,13 @@ plot_prereq_count_by_level <- function(courses_file = "courses_info.csv",
 }
 
 
-#' 图D: 每周课时构成
 #'
-#' 从 class_hours 文本里解析出各类课时(Lecture/Practical/Tutorial 等),
-#' 看整个专业的教学时间是怎么分配的
 #'
 #' @param courses_file courses_info.csv
-#' @param output_file 输出路径
 plot_class_hours <- function(courses_file = "courses_info.csv",
                               output_file = "stat_class_hours.png") {
   courses <- read.csv(courses_file, stringsAsFactors = FALSE)
 
-  # class_hours 格式形如 "Lecture 2 Hours/ Week; Practical 4 Hours/ Week"
-  # 按分号拆开,再提取"类型 + 小时数",只保留按周计的部分
   parsed <- courses %>%
     filter(!is.na(class_hours)) %>%
     select(course_code, class_hours) %>%
@@ -155,7 +132,6 @@ plot_class_hours <- function(courses_file = "courses_info.csv",
   summary_df <- parsed %>%
     group_by(activity) %>%
     summarise(total_hours = sum(hours), n_courses = n(), .groups = "drop") %>%
-    filter(n_courses >= 2) %>%    # 只出现1次的活动类型没有统计意义
     mutate(activity = reorder(activity, total_hours))
 
   p <- ggplot(summary_df, aes(x = total_hours, y = activity)) +
@@ -176,19 +152,14 @@ plot_class_hours <- function(courses_file = "courses_info.csv",
 }
 
 
-#' 图E: 考核方式构成
 #'
-#' 从 assessment_methods 文本里匹配常见考核关键词,
-#' 看这个专业整体是偏考试还是偏作业/项目
 #'
 #' @param courses_file courses_info.csv
-#' @param output_file 输出路径
 plot_assessment_mix <- function(courses_file = "courses_info.csv",
                                  output_file = "stat_assessment_mix.png") {
   courses <- read.csv(courses_file, stringsAsFactors = FALSE) %>%
     filter(!is.na(assessment_methods))
 
-  # 用关键词匹配而不是精确切分,因为这个字段是自由文本、写法很不统一
   keywords <- c(
     Exam = "exam",
     Assignment = "assignment",

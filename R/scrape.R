@@ -6,16 +6,11 @@ library(httr)
 
 USER_AGENT <- "UQCourseGraph/0.1 (educational research)"
 
-#' 抓取 UQ 专业课程列表
 #'
-#' @param url 目标专业 plan 页面 URL
-#' @param output_file 输出 csv 文件名
-#' @return 包含 course_code 列的 data.frame
 fetch_program_courses <- function(url, output_file = "courses_info.csv") {
   
   b <- ChromoteSession$new()
   
-  # 伪装 UA,避开针对 HeadlessChrome 的 403 拦截
   b$Network$enable()
   b$Network$setUserAgentOverride(
     userAgent = USER_AGENT
@@ -24,7 +19,6 @@ fetch_program_courses <- function(url, output_file = "courses_info.csv") {
   b$Page$navigate(url)
   b$Page$loadEventFired(timeout_ = 30)
   
-  # 等待 JS 渲染完成
   Sys.sleep(3)
   
   rendered_html <- b$Runtime$evaluate("document.documentElement.outerHTML")$result$value
@@ -52,10 +46,7 @@ fetch_program_courses <- function(url, output_file = "courses_info.csv") {
   courses_info
 }
 
-#' 从单个课程详情页提取字段
 #'
-#' @param page 用 read_html() 解析好的 rvest 页面对象
-#' @return 单行 tibble,包含 course_name、course_level、faculty、school、
 #'   units、duration、class_hours、incompatible、prerequisite、
 #'   recommended_prerequisite、assessment_methods
 extract_course_info <- function(page) {
@@ -95,12 +86,7 @@ extract_course_info <- function(page) {
 }
 
 
-#' 批量抓取课程详情并写入 csv
 #'
-#' @param course_codes 课程代码向量
-#' @param output_file 输出 csv 文件名
-#' @param delay 每次请求间隔秒数
-#' @return 包含所有课程详情的 data.frame
 fetch_course_details <- function(course_codes, output_file = "courses_info.csv", delay = 1) {
   
   results <- vector("list", length(course_codes))

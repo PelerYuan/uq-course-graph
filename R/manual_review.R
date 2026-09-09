@@ -5,17 +5,10 @@ library(jsonlite)
 
 .sourced_as_library <- TRUE
 source("parse_prerequisites.R")
-rm(.sourced_as_library)  # 用完立刻清理,避免这个变量残留在 session 里影响后面 source 的其他脚本
 
 
-#' 用 R 原生弹窗交互式填写修正模板(替代打开 Excel 手改 csv)
 #'
-#' edit() 是 base R 自带的表格编辑器:Windows 上弹出系统原生数据编辑窗口,
-#' 改完关闭窗口后作为新的 data.frame 返回。Mac 上依赖 X11/XQuartz。
 #'
-#' @param manual_review_file manual_review.csv 路径
-#' @param output_file 保存修正模板的路径
-#' @return 编辑后的 data.frame(已同时写入 output_file)
 review_manually <- function(manual_review_file = "manual_review.csv",
                              output_file = "manual_review_template.csv") {
   review <- read.csv(manual_review_file, stringsAsFactors = FALSE)
@@ -35,17 +28,9 @@ review_manually <- function(manual_review_file = "manual_review.csv",
 }
 
 
-#' 从 manual_review.csv 生成一份人工填写模板(Excel 手改路线,edit() 不可用时的备用方案)
 #'
-#' 在模板里新增两列:
-#'   cleaned_text —— 你手动改写后的、纯课程代码的布尔表达式(能解析就填这个)
-#'   note         —— 备注,说明原文里被去掉的部分,或者为什么这条没法转成课程依赖
 #'
-#' cleaned_text 留空 = 判定这条前置条件本质上无法用课程依赖表示(比如"修满32学分"),
-#' 会被归档到 special_requirements.csv,而不是强行编个假的课程代码进图里
 #'
-#' @param manual_review_file manual_review.csv 路径
-#' @param output_file 模板输出路径
 generate_review_template <- function(manual_review_file = "manual_review.csv",
                                       output_file = "manual_review_template.csv") {
   review <- read.csv(manual_review_file, stringsAsFactors = FALSE)
@@ -58,15 +43,8 @@ generate_review_template <- function(manual_review_file = "manual_review.csv",
 }
 
 
-#' 把人工填写好的模板合并回 prereq_edges.csv / prereq_logic.csv
 #'
-#' - cleaned_text 有内容的行:重新走一遍解析器,结果追加进 edges/logic
-#' - cleaned_text 留空的行:归档进 special_requirements.csv,保留 note 里的说明
 #'
-#' @param template_file 填写好的模板路径
-#' @param edges_file 现有 prereq_edges.csv 路径
-#' @param logic_file 现有 prereq_logic.csv 路径
-#' @param special_file 输出的特殊要求清单路径
 apply_manual_overrides <- function(template_file = "manual_review_template.csv",
                                     edges_file = "prereq_edges.csv",
                                     logic_file = "prereq_logic.csv",

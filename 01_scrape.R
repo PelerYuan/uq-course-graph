@@ -1,6 +1,6 @@
 source("config.R")
 source("R/scrape.R")
 dir.create(DATA_DIR, showWarnings = FALSE)
-url <- sprintf("https://programs-courses.uq.edu.au/requirements/%s/%s/%s", PROGRAM_ROUTE_TYPE, PROGRAM_PLAN_CODE, ACADEMIC_YEAR)
+url <- sprintf("https://programs-courses.uq.edu.au/requirements/%s/%s/%s", PROGRAM_ROUTE_TYPE, PROGRAM_CODE, ACADEMIC_YEAR)
 courses <- fetch_program_courses(url, file.path(DATA_DIR, "course_codes.csv"))
 fetch_course_details(unique(courses$course_code), file.path(DATA_DIR, "courses_info.csv"), REQUEST_DELAY)
