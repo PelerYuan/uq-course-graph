@@ -99,7 +99,7 @@ select_descendants(g, "CSSE1001") |>
 
 See [the architecture guide](docs/architecture.md), [the data model](docs/data-model.md), and [troubleshooting](docs/troubleshooting.md) for details.
 
-For a complete walkthrough of the selector API, read the [filtering and plotting tutorial](docs/selector-tutorial.md), the [API reference](docs/api-reference.md), and run [`examples/selector_examples.R`](examples/selector_examples.R).
+For the complete beginner-to-advanced workflow, read the [complete user guide](docs/complete-user-guide.md). The shorter [filtering and plotting tutorial](docs/selector-tutorial.md), [API reference](docs/api-reference.md), and runnable [`examples/selector_examples.R`](examples/selector_examples.R) are useful as quick references.
 
 ## Limitations and responsible use
 
