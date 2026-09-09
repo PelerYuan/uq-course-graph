@@ -99,6 +99,8 @@ select_descendants(g, "CSSE1001") |>
 
 See [the architecture guide](docs/architecture.md), [the data model](docs/data-model.md), and [troubleshooting](docs/troubleshooting.md) for details.
 
+For a complete walkthrough of the selector API, read the [filtering and plotting tutorial](docs/selector-tutorial.md), the [API reference](docs/api-reference.md), and run [`examples/selector_examples.R`](examples/selector_examples.R).
+
 ## Limitations and responsible use
 
 UQ page structure and available years may change. The scraper stops when the rendered course list is empty and reports failed course requests. Flattened edge counts treat `A or B` as two alternatives, so prerequisite counts are an upper bound. The tool reads public course information; use the built-in delay and avoid high-volume requests.
