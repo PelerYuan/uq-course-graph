@@ -1,0 +1,5 @@
+"course_code","field","raw_text","reason"
+"ENGG1300","prerequisite","Mathematical Methods, Maths B or MATH1040.","contains_free_text"
+"ELEC2300","prerequisite","ENGG1300 and (MATH1051 or MATH1071) and (MATH1052 or MATH1072) and (PHYS1171 OR High School Physics)","contains_free_text"
+"STAT2201","prerequisite","MATH1050 or; a grade of C or higher in Queensland Year 12 Specialist Mathematics (Units 3 & 4) (or equivalent).","contains_free_text"
+"ENGG4901","prerequisite","Students need to have completed 32 units toward the BE(Hons) program.","contains_free_text"

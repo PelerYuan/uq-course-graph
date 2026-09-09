@@ -1,0 +1,10 @@
+PROGRAM_PLAN_CODE <- "ELECEX2350"
+ACADEMIC_YEAR <- 2026
+PROGRAM_ROUTE_TYPE <- "plan"
+COMPLETED_COURSES <- character()
+CURRENT_COURSES <- character()
+REQUEST_DELAY <- 1
+REQUEST_TIMEOUT <- 30
+USER_AGENT <- "UQCourseGraph/0.1 (educational research)"
+DATA_DIR <- "data"
+OUTPUT_DIR <- "output"

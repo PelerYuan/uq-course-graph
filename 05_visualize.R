@@ -1,0 +1,6 @@
+source("config.R")
+source("R/visualize_graph.R")
+g <- readRDS(file.path(DATA_DIR, "graph_object.rds"))
+g <- tag_course_status(g, COMPLETED_COURSES, CURRENT_COURSES)
+dir.create(OUTPUT_DIR, showWarnings = FALSE)
+plot_course_graph(g, file.path(OUTPUT_DIR, "course_dependency_graph.png"), title = sprintf("UQ Course Dependencies: %s", PROGRAM_PLAN_CODE))
