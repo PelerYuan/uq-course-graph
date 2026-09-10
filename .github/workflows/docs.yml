@@ -4,6 +4,7 @@ on:
     branches: [master]
     paths:
       - 'docs-site/**'
+      - 'scripts/check_docs.py'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
 permissions:
@@ -21,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check documentation links and images
+        run: python3 scripts/check_docs.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -2,9 +2,11 @@
 
 > Turn a UQ curriculum into a clear, explorable prerequisite network.
 
-[Start the complete workflow](#/pages/getting-started) [View the repository](https://github.com/PelerYuan/uq-course-graph)
+[Start the complete workflow](/pages/getting-started.md) [View the repository](https://github.com/PelerYuan/uq-course-graph)
 
 <img class="hero-image" src="assets/images/hero-course-dependency-4k.png" alt="High-resolution UQ course dependency graph">
+
+*Click the graph to enlarge it. [Open the full-resolution image](assets/images/hero-course-dependency-4k.png ':ignore') to inspect individual course labels.*
 
 UQ Course Graph is an R workflow for turning a University of Queensland plan or program into a prerequisite network. It helps students identify course pathways, find gateway courses, and explore what a completed course can unlock.
 
@@ -27,9 +29,9 @@ flowchart LR
 
 ## Start here
 
-- Follow the [complete workflow](#/pages/getting-started) for your first run.
-- Read [selector recipes](#/pages/selectors/overview) when you already have `graph_object.rds`.
-- Open the [function reference](#/pages/reference/selectors) for signatures and parameters.
+- Follow the [complete workflow](/pages/getting-started.md) for your first run.
+- Read [selector recipes](/pages/selectors/overview.md) when you already have `graph_object.rds`.
+- Open the [function reference](/pages/reference/selectors.md) for signatures and parameters.
 
 ## Project boundary
 

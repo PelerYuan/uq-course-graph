@@ -5,19 +5,27 @@
   <title>UQ Course Graph Documentation</title>
   <meta name="description" content="A complete guide to collecting UQ course data, parsing prerequisites, building dependency graphs, and exploring curriculum networks with R.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/themes/vue.css">
   <style>
-    :root { --theme-color: #1976d2; --base-font-size: 16px; --sidebar-width: 300px; }
-    .sidebar { position: fixed !important; left: 0 !important; top: 0 !important; bottom: 0 !important; margin: 0 !important; }
-    .content { left: 300px !important; }
-    .markdown-section { max-width: 1180px; }
+    :root { --theme-color: #1976d2; }
+    body { font-size: 16px; }
+    .sidebar { position: fixed; padding-top: 24px; }
+    .sidebar-toggle { position: fixed; }
+    .sidebar-nav { padding-right: 12px; }
+    .sidebar ul li a { white-space: normal; line-height: 1.6; padding: 4px 0; }
+    .sidebar .app-sub-sidebar { border-left: 1px solid #e0e0e0; margin-left: 8px; padding-left: 12px; }
+    .markdown-section { width: 100%; max-width: 1440px; padding: 30px 48px 60px; }
     .markdown-section img { border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-    .markdown-section .hero-image { display: block; width: 100%; max-width: 1500px; max-height: 68vh; object-fit: contain; margin: 1.5rem auto 2.5rem; border-radius: 8px; box-shadow: 0 8px 28px rgba(0,0,0,.16); }
+    .markdown-section .hero-image { display: block; width: 100%; height: auto; margin: 1.5rem auto 2.5rem; border-radius: 8px; }
+    .markdown-section .mermaid { overflow-x: auto; margin: 2rem 0; }
+    .markdown-section .mermaid svg { display: block; margin: auto; }
     .markdown-section pre > code { font-size: 0.9em; }
     @media screen and (max-width: 768px) {
-      .content { left: 0 !important; }
-      .sidebar { left: -300px !important; }
-      body.close .sidebar { left: 0 !important; }
+      .markdown-section { padding: 30px 20px 60px; }
+      .content { padding-top: 64px; }
+      body.close .content { transform: none; }
+      .sidebar { box-shadow: 4px 0 16px rgba(0,0,0,.08); }
+      .sidebar-toggle { background: rgba(255,255,255,.95); }
     }
   </style>
 </head>
@@ -30,22 +38,28 @@
       loadSidebar: true,
       loadNavbar: true,
       homepage: 'README.md',
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+        '/.*/_navbar.md': '/_navbar.md'
+      },
+      relativePath: true,
       subMaxLevel: 3,
       auto2top: true,
       search: { paths: 'auto', placeholder: 'Search the documentation', noData: 'No results' },
       copyCode: { buttonText: 'Copy', successText: 'Copied' },
       pagination: { previousText: 'Previous', nextText: 'Next', crossChapter: true },
-      themeColor: '#1976d2',
-      mermaid: { theme: 'default' }
+      themeColor: '#1976d2'
     };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/copy-code.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/docsify-pagination.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify-mermaid@2/dist/docsify-mermaid.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-r.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-powershell.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4.13.1/lib/plugins/zoom-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2.1.1/dist/docsify-copy-code.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2.10.1/dist/docsify-pagination.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.5/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: false, theme: 'default' });</script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-mermaid@2.0.1/dist/docsify-mermaid.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-r.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-powershell.min.js"></script>
 </body>
 </html>
