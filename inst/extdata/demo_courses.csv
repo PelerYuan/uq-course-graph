@@ -1,0 +1,5 @@
+course_code,course_name,prerequisite,recommended_prerequisite
+CSSE1001,Demo foundation,,
+MATH1051,Demo mathematics,,
+CSSE2010,Demo intermediate,CSSE1001,
+CSSE4010,Demo advanced,CSSE2010 and MATH1051,

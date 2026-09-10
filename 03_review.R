@@ -1,3 +1,3 @@
-source("R/manual_review.R")
-generate_review_template("data/manual_review.csv", "data/manual_review_template.csv")
-cat("Edit data/manual_review_template.csv, then run 03_review.R again.\n")
+source("scripts/load_project.R")
+config <- load_config(Sys.getenv("UQCOURSEGRAPH_CONFIG", "config.R"))
+run_stage("review", config)

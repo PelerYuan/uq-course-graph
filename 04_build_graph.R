@@ -1,5 +1,3 @@
-source("R/build_graph.R")
-g <- build_course_graph("data/courses_info.csv", "data/prereq_edges.csv")
-check_dag(g)
-write.csv(rank_key_courses(g), "data/key_courses.csv", row.names = FALSE)
-saveRDS(g, "data/graph_object.rds")
+source("scripts/load_project.R")
+config <- load_config(Sys.getenv("UQCOURSEGRAPH_CONFIG", "config.R"))
+run_stage("graph", config)

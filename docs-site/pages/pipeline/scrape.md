@@ -1,25 +1,18 @@
 # Stage 1: scrape UQ data
 
-## Why two request methods are used
-
-The requirements page renders course codes with JavaScript, so `fetch_program_courses()` uses `chromote` and overrides the default headless User-Agent. Individual course pages are static, so `fetch_course_details()` uses `httr` and `rvest`.
-
-## Run
-
 ```r
-source("01_scrape.R")
+run_stage("scrape", config)
 ```
 
-## Outputs
+The requirements page is rendered through Chrome. The scraper waits for course elements and closes its browser session on success or failure. Course detail pages use HTTP requests with your configured timeout, user agent, delay, and retry limit.
 
-- `data/course_codes.csv`: discovered course codes;
-- `data/courses_info.csv`: one row per course;
-- console messages for successful and failed requests.
+Each attempted course is saved immediately. Inspect `fetch_status`, `error`, `attempts`, `source_url`, `academic_year`, and `retrieved_at` in `courses_info.csv`. Successful rows are reused only for the same source URL and requested year. Failed rows retry next time; old rows lacking provenance are downloaded again. Changing the requested code list removes unrelated cached rows from that source file.
 
-## Safe reruns
+```r
+# Refresh successful records as well as failed ones:
+run_stage("scrape", config, refresh = TRUE)
+```
 
-Existing course codes are skipped. This makes it safe to rerun after a network interruption. Failed codes can be retried without redownloading successful rows.
+A partial scrape is useful diagnostic evidence, but the managed pipeline refuses to parse it. Check failures and rerun collection. A recorded requested year does not independently verify UQ's historical content; inspect the returned official pages when year-specific accuracy matters.
 
-## Failure messages
-
-An empty rendered course list stops the stage. Check Chrome, the route type, the code, and the year. A single failed detail page is recorded while the other courses continue.
+See [configuration](../configuration.md) and the [scraping reference](../reference/scraping.md).

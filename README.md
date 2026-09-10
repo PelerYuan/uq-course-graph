@@ -1,48 +1,35 @@
 # UQ Course Graph
 
-[![R checks](https://github.com/PelerYuan/uq-course-graph/actions/workflows/r-checks.yml/badge.svg)](https://github.com/PelerYuan/uq-course-graph/actions/workflows/r-checks.yml) [![Documentation](https://img.shields.io/badge/docs-read%20the%20guide-1976d2)](https://peleryuan.github.io/uq-course-graph/)
+[![R checks](https://github.com/PelerYuan/uq-course-graph/actions/workflows/r-checks.yml/badge.svg)](https://github.com/PelerYuan/uq-course-graph/actions/workflows/r-checks.yml)
 
-UQ Course Graph is a reproducible R workflow for collecting public University of Queensland course information, parsing prerequisite relationships, building a directed dependency graph, and exploring focused curriculum networks.
+Collect public University of Queensland course metadata, review prerequisite rules, and explore course networks with the `uqcoursegraph` R package. Graph reachability describes relationships; it does not decide enrolment eligibility or degree completion.
 
-![Example dependency graph](examples/course_dependency_graph.png)
+![Example dependency graph](docs-site/assets/images/gallery/04-two-levels.png)
 
 ## Documentation
 
-The complete user documentation lives in the [Docsify guide](https://peleryuan.github.io/uq-course-graph/). It is the canonical entry point and covers installation, configuration, every pipeline stage, selector recipes, function reference, visual interpretation, troubleshooting, and reproducibility.
+The [documentation website](https://page.peler.top/uq-course-graph/) is the canonical user guide. Start with [installation](https://page.peler.top/uq-course-graph/#/pages/installation) and the [complete workflow](https://page.peler.top/uq-course-graph/#/pages/getting-started). Browse [12 illustrated gallery recipes](https://page.peler.top/uq-course-graph/#/pages/gallery) or consult the [API reference](https://page.peler.top/uq-course-graph/#/pages/reference/workflow).
 
-Start with the [complete workflow](https://peleryuan.github.io/uq-course-graph/#/pages/getting-started), or open the [selector reference](https://peleryuan.github.io/uq-course-graph/#/pages/reference/selectors) if you already have a graph object.
-
-Browse the [gallery](https://page.peler.top/uq-course-graph/#/pages/gallery) for 12 real figures with complete R code. Every example runs on bundled data before you scrape your own curriculum.
-
-## Quick start
+## Install and try offline
 
 ```r
-source("install_deps.R")
-file.copy("config.example.R", "config.R")
-# edit config.R
-source("01_scrape.R")
-source("02_parse.R")
-source("03_review.R")
-source("04_build_graph.R")
-source("05_visualize.R")
+install.packages("remotes", repos = "https://cloud.r-project.org")
+remotes::install_github("PelerYuan/uq-course-graph", upgrade = "never")
+library(uqcoursegraph)
+config <- uq_config(program_code = "DEMO", academic_year = 2026)
+import_course_data(example_file("demo_courses.csv"), config,
+                   source_label = "Bundled synthetic tutorial")
+run_pipeline(config)
 ```
 
-The numbered scripts are intentionally small entry points. Reusable functions live in `R/`. Captured sample outputs and figures live in `examples/` so the analytical stages can be practiced without scraping.
+This synthetic example writes a graph and figure under source-specific `data/` and `output/` subdirectories. To use a clone without installing the package, run `source("install_deps.R")`, then `source("scripts/load_project.R")`. Numbered entry scripts remain available and all read the same local configuration.
 
-## Repository map
+Version 0.2.0 introduces explicit review statuses and source-specific directories. Read the [migration guide](https://page.peler.top/uq-course-graph/#/pages/migration) before using older data or review templates.
 
-```text
-R/          reusable functions
-docs-site/  canonical user documentation
-examples/   captured data and figures
-tests/      testthat tests
-01_*.R      through 05_*.R user-facing stages
-```
+## Development
 
-## Contributing
-
-Development policies are documented separately in [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [NEWS.md](NEWS.md).
+Reusable code is in `R/`; R help files are in `man/`; installed examples are in `inst/extdata/`; user documentation is in `docs-site/`. Tests and contributor instructions are described in [CONTRIBUTING.md](CONTRIBUTING.md). Changes are listed in [NEWS.md](NEWS.md).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT; see [LICENSE.md](LICENSE.md). Public UQ source descriptions are attributed in the bundled example-data README.

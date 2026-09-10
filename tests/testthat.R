@@ -1,2 +1,3 @@
 library(testthat)
-test_check("uq-course-graph")
+library(uqcoursegraph)
+test_check("uqcoursegraph")

@@ -46,9 +46,7 @@ CASES = [
 ]
 
 SETUP = '''# Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -120,7 +118,7 @@ These figures use a bundled ELECEX2350 example snapshot: `examples/gallery_cours
 
 ![{title}: {question}]({image})
 
-[Open original PNG]({image} ':ignore') · [Read the tutorial]({tutorial}) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/{slug}.R ':ignore')
+[Open original PNG]({image} ':ignore') | [Read the tutorial]({tutorial}) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/{slug}.R ':ignore')
 
 ```r
 {code}```
@@ -133,7 +131,16 @@ These figures use a bundled ELECEX2350 example snapshot: `examples/gallery_cours
     page.append('''
 ## Use your own curriculum
 
-After the [complete workflow](getting-started.md) has built your graph, replace the `build_course_graph(...)` line in a network recipe with `g <- readRDS("data/graph_object.rds")`. Choose course codes and prefixes that exist in your graph, and update the illustrative status lists. For the discipline chart, also set `courses_file <- "data/courses_info.csv"`.
+After the [complete workflow](getting-started.md) has built your graph, replace the `build_course_graph(...)` line in a network recipe with the following setup:
+
+```r
+config <- load_config()
+paths <- project_paths(config)
+g <- readRDS(paths$graph)
+courses_file <- paths$courses
+```
+
+ Choose course codes and prefixes that exist in your graph, and update the illustrative status lists. Each exported figure receives a `.manifest.json` sidecar with input checksums, plot settings, and session information.
 
 `depth = 1`, `depth = 2`, and `depth = Inf` change how far a traversal reaches. `select_by_prefix()` removes nodes; `highlight_prefix` changes their appearance. `width` and `height` are in inches; together with `dpi` they determine the PNG resolution. The examples deliberately use different plot sizes for the full network and focused views.
 

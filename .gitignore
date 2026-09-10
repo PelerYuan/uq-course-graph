@@ -6,3 +6,10 @@ output/*
 .RData
 .Rproj.user/
 *.rds
+
+config.R
+*.tar.gz
+*.Rcheck/
+node_modules/
+playwright-report/
+test-results/

@@ -1,0 +1,23 @@
+test_that("selectors validate input and traversal respects direction", {
+  w <- fixture_workspace()
+  run_stage("parse", w$config)
+  g <- build_course_graph(w$paths$courses, w$paths$edges)
+  expect_setequal(igraph::V(select_ancestors(g, "CSSE2010", 1))$course_code, c("CSSE1001", "CSSE2010"))
+  expect_setequal(igraph::V(select_descendants(g, "CSSE2010"))$course_code, "CSSE2010")
+  expect_error(select_courses(g, "ZZZZ9999"), "not found")
+  expect_error(select_ancestors(g, "CSSE1001", -1), "depth")
+  expect_error(select_neighborhood(g, "CSSE1001", 0.5), "depth")
+  expect_error(select_by_prefix(g, "csse"), "uppercase")
+  expect_error(plot_course_graph(select_by_prefix(g, "ZZZZ")), "empty graph")
+  expect_error(tag_course_status(g, "CSSE1001", "CSSE1001"), "overlap")
+  expect_equal(igraph::vcount(g), 3)
+})
+
+test_that("graphs reject invalid references and duplicate edges do not inflate counts", {
+  w <- fixture_workspace()
+  e <- data.frame(course_code = c("CSSE2010", "CSSE2010"), prereq_code = "CSSE1001", field = "prerequisite")
+  utils::write.csv(e, w$paths$edges, row.names = FALSE)
+  expect_equal(igraph::ecount(build_course_graph(w$paths$courses, w$paths$edges)), 1)
+  e$prereq_code <- e$course_code; utils::write.csv(e, w$paths$edges, row.names = FALSE)
+  expect_error(build_course_graph(w$paths$courses, w$paths$edges), "Self-prerequisite")
+})

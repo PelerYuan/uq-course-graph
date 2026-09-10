@@ -1,39 +1,29 @@
 # Troubleshooting
 
-## Chrome cannot start
+## No rendered course codes
 
-Install Google Chrome and make sure it launches normally. `chromote` starts a local headless session. On a server, use the saved example data for offline stages.
+Check the requirements URL in a browser, including its route and year. Verify Chrome and `chromote` installation. Increase the configured timeout if the page is slow. UQ markup can change; do not treat an empty scrape as a valid curriculum.
 
-## No course codes found
+## Failed downloads remain
 
-Check `PROGRAM_CODE`, `PROGRAM_ROUTE_TYPE`, and `ACADEMIC_YEAR`. Open the constructed URL in a browser and confirm that the year exists. A JavaScript-rendered page requires the Chrome stage, not a static request.
+Inspect `fetch_status` and `error` in `courses_info.csv`, then rerun scrape. Successful rows from the same source resume; failures retry. Use `refresh = TRUE` to deliberately refresh successful records. Fix connectivity, server errors, or changed HTML rather than removing the failure status manually.
 
-## HTTP failures
+## Pipeline paused for manual review
 
-Check the console status and retry later. Keep the request delay enabled. Do not increase request volume to work around a temporary failure.
+Open the printed template path. Set every inspected row to approved with a valid cleaned expression, or special with a note. Keep source columns unchanged. Save and rerun review, graph, and plot. See the [review walkthrough](pipeline/review.md).
 
-## Missing course fields
+## Stale result or template
 
-If many fields become empty, UQ may have changed its HTML identifiers. Save the page and report the URL, year, and affected field.
+An input or decision changed after its downstream result was generated. For a changed source, re-import or scrape, then parse again. For a changed template, rerun review. Then rebuild and plot. Changed source expressions need fresh decisions even if an old template contains an approval.
 
-## Manual review rows
+## Missing columns
 
-Free-text rules are expected. Review them in a spreadsheet and keep credit or grade rules as special requirements.
+Check that you supplied the right CSV. Parsing needs both prerequisite fields and course names. The gallery's minimal course-name table supports graph examples but not the parser, assessment, or contact-hours plots. The [complete workflow](getting-started.md) uses a separate synthetic metadata file for its offline tutorial.
 
-## Unknown course selector
+## Missing or empty selection
 
-Inspect available codes:
+Use a code present in `igraph::V(g)$course_code`. Course codes are uppercase four-letter/four-digit identifiers. A prefix filter removes unmatched nodes and may break paths. Increase depth or use highlighting if you want to retain context.
 
-```r
-igraph::V(g)$course_code
-```
+## Invalid old documentation URL
 
-Course codes are case-sensitive in the configuration and selector calls.
-
-## A figure is too dense
-
-Reduce `depth`, choose fewer focus courses, or use a neighborhood rather than the full graph. Increase `width`, `height`, and `dpi` for a report figure.
-
-## A prerequisite disappeared
-
-Check whether `select_by_prefix()` removed it. Use `highlight_prefix` when cross-discipline context should remain.
+Older site versions could turn a page route into an `id` query parameter. The current site redirects those known malformed routes to their proper pages. Reload the site if an old tab still uses cached scripts. Report the exact URL if a link still fails.

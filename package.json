@@ -1,0 +1,10 @@
+{
+  "name": "uq-course-graph-docs",
+  "private": true,
+  "scripts": {
+    "test:docs": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.1"
+  }
+}

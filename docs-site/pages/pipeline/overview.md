@@ -1,27 +1,25 @@
 # Pipeline overview
 
-The numbered scripts are intentionally boring orchestration. They call reusable functions in `R/`, write predictable files, and can be rerun in order.
+Start with the [complete workflow](../getting-started.md) for a runnable offline example. Both the installed package and numbered scripts call the same stage functions.
 
 ```mermaid
 flowchart TB
- S[01_scrape.R] --> C[data/courses_info.csv]
- C --> P[02_parse.R]
- P --> R[data/prereq_edges.csv + logic + review]
- R --> M[03_review.R]
- M --> G[04_build_graph.R]
- G --> O[data/graph_object.rds]
- O --> V[05_visualize.R]
- V --> F[output/*.png]
+ S[Scrape UQ or import CSV] --> C[Validated course snapshot]
+ C --> P[Parse supported expressions]
+ P --> R[Review pending rules]
+ R --> M[Apply approved corrections or record special rules]
+ M --> G[Build graph and rankings]
+ G --> V[Export figures and provenance]
 ```
 
-Run from the repository root. Relative paths in the scripts are based on that directory.
-
-| Stage | Network | Main input | Main output |
+| Stage | Network | Main output | Completion condition |
 | --- | --- | --- | --- |
-| Scrape | Yes | `config.R` | course CSV files |
-| Parse | No | course CSV | edges, logic, review |
-| Review | No | review CSV | corrected edges and special rules |
-| Build | No | courses and edges | graph RDS and rankings |
-| Visualize | No | graph RDS | PNG figures |
+| Scrape / import | Scrape only | `courses_info.csv` | Every course has valid metadata |
+| Parse | No | Automatic edges, logic, review queue | Source checksum matches |
+| Review | No | Canonical edges, logic, special rules | No pending decisions |
+| Graph | No | `graph_object.rds`, `key_courses.csv` | Fresh review, no cycle |
+| Plot | No | PNG and manifests | Fresh graph and upstream inputs |
 
-A stage should fail clearly when a required file is absent. Do not skip directly to visualization unless a graph object already exists.
+`project_paths(config)` locates every file. For the default configuration, data lives under `data/plan-ELECEX2350-2026/` and figures under `output/plan-ELECEX2350-2026/`. Changing the code, route, or year creates a separate workspace.
+
+The source scripts read `config.R` from the repository root. An installed package accepts `uq_config()` directly. After an intentional source replacement, rerun parse, review, graph, and plot. Review decisions survive only when their original course, field, and text are unchanged. See [reproducibility](../reproducibility.md) for freshness checks and [migration](../migration.md) for older workspaces.

@@ -1,19 +1,13 @@
 # Stage 2: parse prerequisites
 
 ```r
-source("02_parse.R")
+run_stage("parse", config)
 ```
 
-The parser recognizes nested expressions such as:
+Input must be a successful scrape or an explicitly imported snapshot. The managed stage checks that its source file still matches the recorded checksum. Both `prerequisite` and `recommended_prerequisite` columns must exist; an empty field means no text was supplied, not a verified absence of every academic rule.
 
-```text
-ENGG1300 and (MATH1051 or MATH1071)
-```
+The grammar supports course codes, explicit AND/OR operators, and parentheses. AND binds more tightly than OR. Bare commas, free text, missing operands, and unmatched parentheses enter the review queue. A trailing period or semicolon and a comma immediately followed by an explicit conjunction are supported.
 
-It writes:
+Outputs retain headers even when they contain no rows. Automatic base tables end in `_auto.csv`; canonical tables omit that suffix and are subsequently updated by review. Re-parsing regenerates canonical tables, so always rerun review before graph construction.
 
-- `data/prereq_edges.csv` for graph traversal;
-- `data/prereq_logic.csv` for preserved Boolean structure;
-- `data/manual_review.csv` for unsupported or ambiguous text.
-
-OR alternatives are flattened into multiple edges for traversal. The logic JSON remains the authoritative representation when you need to distinguish alternatives from mandatory combinations.
+See the [parsing reference](../reference/parsing.md) and [review walkthrough](review.md).

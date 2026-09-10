@@ -1,0 +1,20 @@
+Package: uqcoursegraph
+Type: Package
+Title: Collect and Explore University of Queensland Course Dependencies
+Version: 0.2.0
+Authors@R: person("Peler", "Yuan", email = "peleryuan@users.noreply.github.com", role = c("aut", "cre"))
+Description: Collect public curriculum information, parse prerequisite expressions,
+    review ambiguous requirements, and explore directed course networks. Includes
+    resumable collection, source metadata, reproducible offline examples,
+    graph selectors, and static visualizations. Graph reachability does not
+    determine enrolment eligibility or satisfaction of degree requirements.
+License: MIT + file LICENSE
+URL: https://page.peler.top/uq-course-graph/, https://github.com/PelerYuan/uq-course-graph
+BugReports: https://github.com/PelerYuan/uq-course-graph/issues
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports: digest, dplyr, ggraph, ggplot2, grid, httr, igraph, jsonlite,
+    rvest, stringr, tibble, tidygraph, tidyr, scales, utils, stats, withr
+Suggests: chromote, roxygen2, testthat (>= 3.1.0)
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0

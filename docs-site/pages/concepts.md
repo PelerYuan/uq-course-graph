@@ -2,7 +2,7 @@
 
 ## Nodes and edges
 
-A node represents a course code. An edge is directed from the course that has a requirement to the course named as its prerequisite. Following incoming edges moves backwards toward preparation. Following outgoing edges moves forwards toward courses that may be unlocked.
+A node represents a course code. An edge is directed from the prerequisite course to the dependent course that requires it. Following incoming edges moves backwards toward preparation. Following outgoing edges moves forwards toward courses that may be unlocked.
 
 ## Course table
 
@@ -24,7 +24,7 @@ A node represents a course code. An edge is directed from the course that has a 
 
 ## External nodes
 
-An external node is referenced by an edge but is absent from the selected plan. It is not an error. It tells you that a course depends on a course from another plan, school, or prerequisite pathway.
+An external node is referenced by an edge but is absent from the selected plan. The graph marks these nodes with `is_external = TRUE`. It is not an error. It tells you that a course depends on a course from another plan, school, or prerequisite pathway.
 
 ## Study status
 

@@ -49,13 +49,14 @@ The tool describes published course relationships. It does not decide whether a 
 
 ## Quick start
 
+After [installation](/pages/installation.md), run this small synthetic example. It demonstrates the workflow without making website requests; the gallery uses a separate captured public snapshot.
+
 ```r
-source("install_deps.R")
-file.copy("config.example.R", "config.R")
-# edit config.R
-source("01_scrape.R")
-source("02_parse.R")
-source("03_review.R")
-source("04_build_graph.R")
-source("05_visualize.R")
+library(uqcoursegraph)
+config <- uq_config(program_code = "DEMO", academic_year = 2026)
+import_course_data(example_file("demo_courses.csv"), config,
+                   source_label = "Bundled synthetic tutorial")
+run_pipeline(config)
 ```
+
+For a source checkout, replace `library(uqcoursegraph)` with `source("scripts/load_project.R")`. Follow the [complete workflow](/pages/getting-started.md) to configure your own curriculum and complete manual review. Existing users should read [migration notes](/pages/migration.md).

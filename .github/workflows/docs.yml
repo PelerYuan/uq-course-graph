@@ -10,6 +10,10 @@ on:
       - 'examples/gallery.R'
       - 'examples/gallery_courses.csv'
       - '.github/workflows/docs.yml'
+      - 'browser-tests/**'
+      - 'playwright.config.cjs'
+      - 'package*.json'
+      - 'scripts/serve_docs.cjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,6 +34,19 @@ jobs:
         run: python3 scripts/check_docs.py
       - name: Check gallery code and documentation are synchronized
         run: python3 scripts/build_gallery.py --check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Verify desktop and mobile navigation under the deployment subpath
+        run: npm run test:docs
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: docs-browser-report
+          path: playwright-report
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -52,13 +52,11 @@ These figures use a bundled ELECEX2350 example snapshot: `examples/gallery_cours
 
 ![The whole curriculum: Where are the main pathways?](../assets/images/gallery/01-overview.png)
 
-[Open original PNG](../assets/images/gallery/01-overview.png ':ignore') · [Read the tutorial](results/network.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/01-overview.R ':ignore')
+[Open original PNG](../assets/images/gallery/01-overview.png ':ignore') | [Read the tutorial](results/network.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/01-overview.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -84,13 +82,11 @@ plot_course_graph(view, output_file, title = "Curriculum overview", width = 16, 
 
 ![A shortlist of courses: How are these five courses connected?](../assets/images/gallery/02-exact.png)
 
-[Open original PNG](../assets/images/gallery/02-exact.png ':ignore') · [Read the tutorial](selectors/exact.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/02-exact.R ':ignore')
+[Open original PNG](../assets/images/gallery/02-exact.png ':ignore') | [Read the tutorial](selectors/exact.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/02-exact.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -117,13 +113,11 @@ plot_course_graph(view, output_file, title = "A shortlist of courses",
 
 ![Direct prerequisites: What immediately precedes CSSE4010?](../assets/images/gallery/03-direct.png)
 
-[Open original PNG](../assets/images/gallery/03-direct.png ':ignore') · [Read the tutorial](selectors/ancestors.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/03-direct.R ':ignore')
+[Open original PNG](../assets/images/gallery/03-direct.png ':ignore') | [Read the tutorial](selectors/ancestors.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/03-direct.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -150,13 +144,11 @@ plot_course_graph(view, output_file, title = "Direct prerequisites",
 
 ![Two levels of prerequisites: What comes before the direct prerequisites?](../assets/images/gallery/04-two-levels.png)
 
-[Open original PNG](../assets/images/gallery/04-two-levels.png ':ignore') · [Read the tutorial](selectors/ancestors.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/04-two-levels.R ':ignore')
+[Open original PNG](../assets/images/gallery/04-two-levels.png ':ignore') | [Read the tutorial](selectors/ancestors.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/04-two-levels.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -183,13 +175,11 @@ plot_course_graph(view, output_file, title = "Two levels of prerequisites",
 
 ![The complete prerequisite chain: Which foundations lead to CSSE4010?](../assets/images/gallery/05-all-ancestors.png)
 
-[Open original PNG](../assets/images/gallery/05-all-ancestors.png ':ignore') · [Read the tutorial](selectors/ancestors.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/05-all-ancestors.R ':ignore')
+[Open original PNG](../assets/images/gallery/05-all-ancestors.png ':ignore') | [Read the tutorial](selectors/ancestors.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/05-all-ancestors.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -216,13 +206,11 @@ plot_course_graph(view, output_file, title = "The complete prerequisite chain",
 
 ![Downstream pathways: Which courses are downstream of CSSE1001?](../assets/images/gallery/06-descendants.png)
 
-[Open original PNG](../assets/images/gallery/06-descendants.png ':ignore') · [Read the tutorial](selectors/descendants.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/06-descendants.R ':ignore')
+[Open original PNG](../assets/images/gallery/06-descendants.png ':ignore') | [Read the tutorial](selectors/descendants.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/06-descendants.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -249,13 +237,11 @@ plot_course_graph(view, output_file, title = "Downstream pathways",
 
 ![A local neighborhood: What is connected to CSSE2310 within one step?](../assets/images/gallery/07-neighborhood.png)
 
-[Open original PNG](../assets/images/gallery/07-neighborhood.png ':ignore') · [Read the tutorial](selectors/neighborhood.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/07-neighborhood.R ':ignore')
+[Open original PNG](../assets/images/gallery/07-neighborhood.png ':ignore') | [Read the tutorial](selectors/neighborhood.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/07-neighborhood.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -282,13 +268,11 @@ plot_course_graph(view, output_file, title = "A local neighborhood",
 
 ![Keep only one discipline: What remains when only ELEC courses are kept?](../assets/images/gallery/08-prefix-filter.png)
 
-[Open original PNG](../assets/images/gallery/08-prefix-filter.png ':ignore') · [Read the tutorial](selectors/prefixes.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/08-prefix-filter.R ':ignore')
+[Open original PNG](../assets/images/gallery/08-prefix-filter.png ':ignore') | [Read the tutorial](selectors/prefixes.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/08-prefix-filter.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -315,13 +299,11 @@ plot_course_graph(view, output_file, title = "Keep only one discipline",
 
 ![Highlight without removing context: Where does ELEC sit in the full curriculum?](../assets/images/gallery/09-prefix-highlight.png)
 
-[Open original PNG](../assets/images/gallery/09-prefix-highlight.png ':ignore') · [Read the tutorial](selectors/prefixes.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/09-prefix-highlight.R ':ignore')
+[Open original PNG](../assets/images/gallery/09-prefix-highlight.png ':ignore') | [Read the tutorial](selectors/prefixes.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/09-prefix-highlight.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -348,13 +330,11 @@ plot_course_graph(view, output_file, title = "ELEC in its curriculum context",
 
 ![Combine traversal and discipline: Which CSSE and ELEC courses are downstream of CSSE1001?](../assets/images/gallery/10-composition.png)
 
-[Open original PNG](../assets/images/gallery/10-composition.png ':ignore') · [Read the tutorial](selectors/composition.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/10-composition.R ':ignore')
+[Open original PNG](../assets/images/gallery/10-composition.png ':ignore') | [Read the tutorial](selectors/composition.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/10-composition.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -382,13 +362,11 @@ plot_course_graph(view, output_file, title = "Combine traversal and discipline",
 
 ![Gateway courses: Which courses reach the largest downstream networks?](../assets/images/gallery/11-gateways.png)
 
-[Open original PNG](../assets/images/gallery/11-gateways.png ':ignore') · [Read the tutorial](results/statistics.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/11-gateways.R ':ignore')
+[Open original PNG](../assets/images/gallery/11-gateways.png ':ignore') | [Read the tutorial](results/statistics.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/11-gateways.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -415,13 +393,11 @@ plot_key_courses(ranking_file, top_n = 12, output_file = output_file)
 
 ![Discipline and course level: How is the course list distributed?](../assets/images/gallery/12-disciplines.png)
 
-[Open original PNG](../assets/images/gallery/12-disciplines.png ':ignore') · [Read the tutorial](results/statistics.md) · [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/12-disciplines.R ':ignore')
+[Open original PNG](../assets/images/gallery/12-disciplines.png ':ignore') | [Read the tutorial](results/statistics.md) | [Download this R recipe](https://raw.githubusercontent.com/PelerYuan/uq-course-graph/master/examples/gallery/12-disciplines.R ':ignore')
 
 ```r
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
@@ -442,7 +418,16 @@ plot_prefix_by_level(courses_file, output_file = output_file)
 
 ## Use your own curriculum
 
-After the [complete workflow](getting-started.md) has built your graph, replace the `build_course_graph(...)` line in a network recipe with `g <- readRDS("data/graph_object.rds")`. Choose course codes and prefixes that exist in your graph, and update the illustrative status lists. For the discipline chart, also set `courses_file <- "data/courses_info.csv"`.
+After the [complete workflow](getting-started.md) has built your graph, replace the `build_course_graph(...)` line in a network recipe with the following setup:
+
+```r
+config <- load_config()
+paths <- project_paths(config)
+g <- readRDS(paths$graph)
+courses_file <- paths$courses
+```
+
+ Choose course codes and prefixes that exist in your graph, and update the illustrative status lists. Each exported figure receives a `.manifest.json` sidecar with input checksums, plot settings, and session information.
 
 `depth = 1`, `depth = 2`, and `depth = Inf` change how far a traversal reaches. `select_by_prefix()` removes nodes; `highlight_prefix` changes their appearance. `width` and `height` are in inches; together with `dpi` they determine the PNG resolution. The examples deliberately use different plot sizes for the full network and focused views.
 

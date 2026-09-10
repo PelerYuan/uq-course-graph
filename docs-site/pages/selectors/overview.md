@@ -5,9 +5,11 @@ Start with the [gallery](../gallery.md) to compare actual outputs and copy a com
 Selectors answer planning questions by returning a graph containing only relevant nodes. They do not edit the original graph.
 
 ```r
-source("R/visualize_graph.R")
-g <- readRDS("data/graph_object.rds")
-g <- tag_course_status(g, COMPLETED_COURSES, CURRENT_COURSES)
+source("scripts/load_project.R")
+config <- load_config()
+paths <- project_paths(config)
+g <- readRDS(paths$graph)
+g <- tag_course_status(g, config$completed, config$current)
 ```
 
 | Question | Function |

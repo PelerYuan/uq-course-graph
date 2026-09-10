@@ -26,6 +26,8 @@
   - [Statistics](/pages/results/statistics.md)
   - [Limitations](/pages/results/limitations.md)
 - **Reference**
+  - [Workflow functions](/pages/reference/workflow.md)
+  - [Review functions](/pages/reference/review.md)
   - [Scraping functions](/pages/reference/scraping.md)
   - [Parsing functions](/pages/reference/parsing.md)
   - [Graph functions](/pages/reference/graph.md)
@@ -34,3 +36,4 @@
 - **Support**
   - [Troubleshooting](/pages/troubleshooting.md)
   - [Reproducibility](/pages/reproducibility.md)
+  - [Migration to 0.2.0](/pages/migration.md)

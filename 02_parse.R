@@ -1,3 +1,3 @@
-source("R/parse_prereq.R")
-courses <- read.csv(file.path("data", "courses_info.csv"), stringsAsFactors = FALSE)
-parse_all_prerequisites(courses, "data")
+source("scripts/load_project.R")
+config <- load_config(Sys.getenv("UQCOURSEGRAPH_CONFIG", "config.R"))
+run_stage("parse", config)

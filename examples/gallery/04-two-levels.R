@@ -1,7 +1,5 @@
 # Run from the repository root after installing dependencies.
-source("R/build_graph.R")
-source("R/visualize_graph.R")
-source("R/plot_stats.R")
+source("scripts/load_project.R")
 
 # A bundled example: no scraping, config.R, or private RDS file is needed.
 courses_file <- "examples/gallery_courses.csv"
