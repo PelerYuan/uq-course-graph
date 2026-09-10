@@ -43,6 +43,8 @@
         '/.*/_navbar.md': '/_navbar.md'
       },
       relativePath: true,
+      // Revalidate Markdown so a new shell cannot render stale navigation.
+      requestHeaders: { 'Cache-Control': 'no-cache' },
       subMaxLevel: 3,
       auto2top: true,
       search: { paths: 'auto', placeholder: 'Search the documentation', noData: 'No results' },
