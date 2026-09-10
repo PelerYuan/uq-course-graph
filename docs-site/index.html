@@ -6,14 +6,19 @@
   <meta name="description" content="A complete guide to collecting UQ course data, parsing prerequisites, building dependency graphs, and exploring curriculum networks with R.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
   <style>
-    :root { --theme-color: #1976d2; --base-font-size: 16px; --sidebar-width: 290px; }
+    :root { --theme-color: #1976d2; --base-font-size: 16px; --sidebar-width: 300px; }
+    .sidebar { position: fixed !important; left: 0 !important; top: 0 !important; bottom: 0 !important; margin: 0 !important; }
+    .content { left: 300px !important; }
+    .markdown-section { max-width: 1180px; }
     .markdown-section img { border: 1px solid #e0e0e0; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-    .cover-main img { display: block; width: min(92vw, 1500px); max-width: 92vw; max-height: 62vh; object-fit: contain; margin: 2.5rem auto 1.5rem; border-radius: 10px; box-shadow: 0 8px 30px rgba(0,0,0,.18); }
-    .cover-main blockquote { max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .markdown-section .hero-image { display: block; width: 100%; max-width: 1500px; max-height: 68vh; object-fit: contain; margin: 1.5rem auto 2.5rem; border-radius: 8px; box-shadow: 0 8px 28px rgba(0,0,0,.16); }
     .markdown-section pre > code { font-size: 0.9em; }
-    .app-nav { margin-right: 24px; }
+    @media screen and (max-width: 768px) {
+      .content { left: 0 !important; }
+      .sidebar { left: -300px !important; }
+      body.close .sidebar { left: 0 !important; }
+    }
   </style>
 </head>
 <body>
@@ -24,8 +29,7 @@
       repo: 'PelerYuan/uq-course-graph',
       loadSidebar: true,
       loadNavbar: true,
-      coverpage: '_coverpage.md',
-      homepage: 'pages/getting-started.md',
+      homepage: 'README.md',
       subMaxLevel: 3,
       auto2top: true,
       search: { paths: 'auto', placeholder: 'Search the documentation', noData: 'No results' },

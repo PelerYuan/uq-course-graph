@@ -81,9 +81,9 @@ select_descendants(g, "CSSE1001") |>
                     title = "Courses unlocked by CSSE1001")
 ```
 
-![Prerequisites example](assets/images/subgraph_csse4010_prereqs.png)
+![Prerequisites example](../assets/images/subgraph_csse4010_prereqs.png)
 
-![Unlocks example](assets/images/subgraph_csse1001_unlocks.png)
+![Unlocks example](../assets/images/subgraph_csse1001_unlocks.png)
 
 ## What to do next
 
