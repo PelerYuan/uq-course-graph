@@ -17,6 +17,8 @@ R CMD build .
 R CMD check uqcoursegraph_0.2.0.tar.gz --no-manual
 ```
 
+The shell commands above work in Bash (including Git Bash on Windows). In PowerShell, use `R.exe` instead of `R`, which is a built-in history alias.
+
 Tests use small offline fixtures and mocked HTTP responses. Do not make the unit suite depend on live UQ availability. Add behavioral regressions for bugs, including failure and recovery paths. Keep personal configuration and generated workspaces out of Git. Record user-facing changes in `NEWS.md`; update DESCRIPTION and the internal version together when releasing. The source archive is the versioned release artifact; DESCRIPTION records dependency requirements and figure manifests record the actual runtime versions.
 
 Edit roxygen comments, then regenerate both `man/` and the website reference. Do not edit generated reference pages independently. Commit those outputs with the implementation. The maintained tutorial has one home in `docs-site/`; avoid adding parallel guides under `docs/`.
