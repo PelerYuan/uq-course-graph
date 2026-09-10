@@ -20,7 +20,17 @@
     .markdown-section .mermaid { overflow-x: auto; margin: 2rem 0; }
     .markdown-section .mermaid svg { display: block; margin: auto; }
     .markdown-section pre > code { font-size: 0.9em; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 24px 0 40px; }
+    .markdown-section .gallery-card { display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #dce4eb; border-radius: 10px; text-decoration: none; background: #fff; }
+    .gallery-card:hover { border-color: var(--theme-color); box-shadow: 0 4px 16px rgba(25,118,210,.12); }
+    .gallery-card:focus-visible { outline: 3px solid var(--theme-color); outline-offset: 3px; }
+    .markdown-section .gallery-card img { width: 100%; aspect-ratio: 3 / 2; object-fit: contain; border: 0; box-shadow: none; }
+    .gallery-card span { color: #505d6b; font-size: 14px; font-weight: 400; line-height: 1.5; }
+    @media screen and (max-width: 1100px) {
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
     @media screen and (max-width: 768px) {
+      .gallery-grid { grid-template-columns: 1fr; }
       .markdown-section { padding: 30px 20px 60px; }
       .content { padding-top: 64px; }
       body.close .content { transform: none; }

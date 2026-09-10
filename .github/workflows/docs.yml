@@ -5,6 +5,10 @@ on:
     paths:
       - 'docs-site/**'
       - 'scripts/check_docs.py'
+      - 'scripts/build_gallery.py'
+      - 'examples/gallery/**'
+      - 'examples/gallery.R'
+      - 'examples/gallery_courses.csv'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
 permissions:
@@ -24,6 +28,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check documentation links and images
         run: python3 scripts/check_docs.py
+      - name: Check gallery code and documentation are synchronized
+        run: python3 scripts/build_gallery.py --check
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -1,5 +1,7 @@
 # Selector overview
 
+Start with the [gallery](../gallery.md) to compare actual outputs and copy a complete runnable example, then use this guide to understand the selectors.
+
 Selectors answer planning questions by returning a graph containing only relevant nodes. They do not edit the original graph.
 
 ```r

@@ -1,5 +1,6 @@
 - **Start here**
   - [Welcome](/)
+  - [Gallery](/pages/gallery.md)
   - [Complete workflow](/pages/getting-started.md)
   - [Concepts and data model](/pages/concepts.md)
 - **Install and configure**

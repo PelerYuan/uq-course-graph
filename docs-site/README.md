@@ -10,6 +10,16 @@
 
 UQ Course Graph is an R workflow for turning a University of Queensland plan or program into a prerequisite network. It helps students identify course pathways, find gateway courses, and explore what a completed course can unlock.
 
+## Explore the gallery
+
+See [12 real examples with complete, runnable R code](/pages/gallery.md), from focused prerequisite chains to whole-curriculum statistics. Each example uses the bundled data, so you can try it before scraping your own plan.
+
+<div class="gallery-grid">
+<a class="gallery-card" href="#/pages/gallery?id=view-04-two-levels"><img src="assets/images/gallery/04-two-levels.png" alt="Two levels of CSSE4010 prerequisites" loading="lazy"><strong>Trace prerequisites</strong><span>Compare direct, two-level, and complete prerequisite chains.</span></a>
+<a class="gallery-card" href="#/pages/gallery?id=view-09-prefix-highlight"><img src="assets/images/gallery/09-prefix-highlight.png" alt="ELEC highlighted in the full curriculum" loading="lazy"><strong>Explore disciplines</strong><span>Compare filtering with highlighting while preserving context.</span></a>
+<a class="gallery-card" href="#/pages/gallery?id=view-11-gateways"><img src="assets/images/gallery/11-gateways.png" alt="Gateway courses ranked by downstream reach" loading="lazy"><strong>Find gateway courses</strong><span>Rank courses using the network's downstream reach.</span></a>
+</div>
+
 ## The five-stage workflow
 
 ```mermaid

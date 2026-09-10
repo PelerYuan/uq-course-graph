@@ -15,15 +15,19 @@ def main():
     for page in ROOT.rglob("*.md"):
         text = page.read_text(encoding="utf-8")
         text = re.sub(r"```.*?```", "", text, flags=re.S)
-        targets = re.findall(r"!?\[[^\]]*\]\(([^\s)]+)", text)
-        targets += re.findall(r'(?:src|href)="([^\"]+)"', text)
-        for target in targets:
+        # Docsify resolves Markdown links relative to the article. Raw HTML
+        # URLs resolve against the site's index.html, even on a hash route.
+        targets = [(target, page.parent) for target in
+                   re.findall(r"!?\[[^\]]*\]\(([^\s)]+)", text)]
+        targets += [(target, ROOT) for target in
+                    re.findall(r'(?:src|href)="([^\"]+)"', text)]
+        for target, base in targets:
             url = urlsplit(target)
             if url.scheme or url.netloc or not url.path:
                 continue
             path = unquote(url.path)
             resolved = ((ROOT / path.lstrip("/")) if path.startswith("/")
-                        else (page.parent / path)).resolve()
+                        else (base / path)).resolve()
             if resolved.is_dir():
                 resolved /= "README.md"
             checked += 1

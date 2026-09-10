@@ -16,3 +16,16 @@ Before publishing layout or navigation changes:
 4. Check image loading, image zoom, Mermaid diagrams, search results, and browser console errors.
 5. Toggle the desktop menu. Repeat navigation at a narrow viewport (for example, 390 px); the menu should open at the left edge and close after selecting a page.
 6. After the Pages workflow succeeds, reload the deployed site and repeat the key clicks. Test under `/uq-course-graph/`, since a root-only local preview cannot expose every subpath issue.
+
+### Gallery maintenance
+
+Edit the recipes and explanations in `scripts/build_gallery.py`, which is the source of truth for both the downloadable R scripts and displayed code. From the repository root run:
+
+```sh
+python scripts/build_gallery.py
+Rscript examples/gallery.R
+python scripts/build_gallery.py --publish
+python scripts/check_docs.py
+```
+
+The first command writes the individual recipes and Markdown. R executes those exact recipes against the bundled CSV snapshot. The publish command copies their actual PNG outputs into the site. Inspect the full network, a focused network, and statistics at normal and narrow browser widths before committing. Never substitute unrelated images when a recipe fails. Commit the generated scripts, page, images, and source changes together. Python uses only the standard library; R uses the existing project dependencies.

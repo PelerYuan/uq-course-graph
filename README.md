@@ -12,6 +12,8 @@ The complete user documentation lives in the [Docsify guide](https://peleryuan.g
 
 Start with the [complete workflow](https://peleryuan.github.io/uq-course-graph/#/pages/getting-started), or open the [selector reference](https://peleryuan.github.io/uq-course-graph/#/pages/reference/selectors) if you already have a graph object.
 
+Browse the [gallery](https://page.peler.top/uq-course-graph/#/pages/gallery) for 12 real figures with complete R code. Every example runs on bundled data before you scrape your own curriculum.
+
 ## Quick start
 
 ```r
